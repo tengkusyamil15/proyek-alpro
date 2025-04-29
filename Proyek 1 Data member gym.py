@@ -1,14 +1,51 @@
 import tkinter as tk
 from tkinter import messagebox
 
+# Data pengguna (disimpan sementara dalam dictionary)
+users = {}
+
+# Fungsi untuk memproses sign up
+def sign_up():
+    def proses_sign_up():
+        nama = entry_nama.get()
+        username = entry_username.get()
+        password = entry_password.get()
+
+        if not nama or not username or not password:
+            messagebox.showerror("Error", "Semua kolom harus diisi!")
+            return
+
+        if username in users:
+            messagebox.showerror("Error", "Username sudah terdaftar!")
+        else:
+            users[username] = {"nama": nama, "password": password}
+            messagebox.showinfo("Berhasil", "Sign Up berhasil! Silakan login.")
+            sign_up_window.destroy()
+
+    sign_up_window = tk.Toplevel(root)
+    sign_up_window.title("Sign Up")
+
+    tk.Label(sign_up_window, text="Nama Lengkap:").pack(pady=5)
+    entry_nama = tk.Entry(sign_up_window)
+    entry_nama.pack(pady=5)
+
+    tk.Label(sign_up_window, text="Username:").pack(pady=5)
+    entry_username = tk.Entry(sign_up_window)
+    entry_username.pack(pady=5)
+
+    tk.Label(sign_up_window, text="Password:").pack(pady=5)
+    entry_password = tk.Entry(sign_up_window, show="*")
+    entry_password.pack(pady=5)
+
+    tk.Button(sign_up_window, text="Sign Up", command=proses_sign_up).pack(pady=10)
+
 # Fungsi untuk memproses login
 def login():
     username = entry_username.get()
     password = entry_password.get()
 
-    # Validasi username dan password (sesuaikan dengan kebutuhan Anda)
-    if username == "admin" and password == "12345":
-        messagebox.showinfo("Login Berhasil", "Selamat datang!")
+    if username in users and users[username]["password"] == password:
+        messagebox.showinfo("Login Berhasil", f"Selamat datang, {users[username]['nama']}!")
     else:
         messagebox.showerror("Login Gagal", "Username atau password salah!")
 
@@ -31,6 +68,10 @@ entry_password.pack(pady=5)
 # Tombol login
 button_login = tk.Button(root, text="Login", command=login)
 button_login.pack(pady=10)
+
+# Tombol sign up
+button_sign_up = tk.Button(root, text="Sign Up", command=sign_up)
+button_sign_up.pack(pady=10)
 
 # Menjalankan aplikasi
 root.mainloop()

@@ -102,7 +102,7 @@ def hapus_member(data):
 def menu():
     data = load_data()
     while True:
-        print("\n=== Aplikasi Data Member Gym ===")
+        print("\n=== Aplikasi Data Member Gym Telyu ===")
         print("1. Lihat Data Member")
         print("2. Tambah Data Member")
         print("3. Edit Data Member")

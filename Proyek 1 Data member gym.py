@@ -1,4 +1,4 @@
-import csv
+import csv telyuuuuuuuu
 
 FILE_NAME = "data_member.csv"
 

@@ -1,4 +1,41 @@
-import csv mnjm
+import tkinter as tk
+from tkinter import messagebox
+
+# Fungsi untuk memproses login
+def login():
+    username = entry_username.get()
+    password = entry_password.get()
+
+    # Validasi username dan password (sesuaikan dengan kebutuhan Anda)
+    if username == "admin" and password == "12345":
+        messagebox.showinfo("Login Berhasil", "Selamat datang!")
+    else:
+        messagebox.showerror("Login Gagal", "Username atau password salah!")
+
+# Membuat jendela utama
+root = tk.Tk()
+root.title("Halaman Login")
+
+# Label dan entry untuk username
+label_username = tk.Label(root, text="Username:")
+label_username.pack(pady=5)
+entry_username = tk.Entry(root)
+entry_username.pack(pady=5)
+
+# Label dan entry untuk password
+label_password = tk.Label(root, text="Password:")
+label_password.pack(pady=5)
+entry_password = tk.Entry(root, show="*")
+entry_password.pack(pady=5)
+
+# Tombol login
+button_login = tk.Button(root, text="Login", command=login)
+button_login.pack(pady=10)
+
+# Menjalankan aplikasi
+root.mainloop()
+
+import csv
 
 FILE_NAME = "data_member.csv"
 

@@ -1,4 +1,4 @@
-import csv 
+import csv mnjm
 
 FILE_NAME = "data_member.csv"
 

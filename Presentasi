@@ -33,7 +33,7 @@ def load_data():
 
 def simpan_data(data):
     with open(FILE_NAME, mode='w', newline='') as file:
-        fieldnames = ['Nama Lengkap', 'Berat Badan', 'Tinggi Badan', 'Jenis Kelamin', 'Umur']
+        fieldnames = ['Nama Lengkap', 'Tanggal Lahir', 'Berat Badan', 'Tinggi Badan', 'Jenis Kelamin', 'Umur']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for member in data:
@@ -47,12 +47,14 @@ def tampilkan_data(data):
         bmi = hitung_bmi(member['Berat Badan'], member['Tinggi Badan'])
         kategori = kategori_bmi(bmi)
         print(f"{i+1}. {member['Nama Lengkap']} | {member['Jenis Kelamin']} | Umur: {member['Umur']} tahun")
+        print(f"   Tanggal Lahir: {member['Tanggal Lahir']}")
         print(f"   Berat: {member['Berat Badan']} kg, Tinggi: {member['Tinggi Badan']} cm")
         print(f"   BMI: {bmi} ({kategori})")
         print("-" * 50)
 
 def tambah_member(data):
     nama = input("Nama Lengkap: ")
+    tgl_lahir = input("Tanggal Lahir (dd-mm-yyyy): ")
     berat = float(input("Berat Badan (kg): "))
     tinggi = float(input("Tinggi Badan (cm): "))
     gender = input("Jenis Kelamin (L/P): ")
@@ -60,6 +62,7 @@ def tambah_member(data):
 
     member = {
         'Nama Lengkap': nama,
+        'Tanggal Lahir': tgl_lahir,
         'Berat Badan': berat,
         'Tinggi Badan': tinggi,
         'Jenis Kelamin': gender.upper(),
@@ -75,6 +78,7 @@ def edit_member(data):
         idx = int(input("Pilih nomor data yang ingin diedit: ")) - 1
         if 0 <= idx < len(data):
             data[idx]['Nama Lengkap'] = input("Nama Lengkap: ")
+            data[idx]['Tanggal Lahir'] = input("Tanggal Lahir (dd-mm-yyyy): ")
             data[idx]['Berat Badan'] = float(input("Berat Badan (kg): "))
             data[idx]['Tinggi Badan'] = float(input("Tinggi Badan (cm): "))
             data[idx]['Jenis Kelamin'] = input("Jenis Kelamin (L/P): ").upper()
